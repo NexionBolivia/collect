@@ -13,6 +13,7 @@ import org.odk.collect.android.activities.GeoPointMapActivity;
 import org.odk.collect.android.activities.GeoPolyActivity;
 import org.odk.collect.android.activities.InstanceUploaderActivity;
 import org.odk.collect.android.activities.InstanceUploaderListActivity;
+import org.odk.collect.android.activities.MainActivity;
 import org.odk.collect.android.activities.MainMenuActivity;
 import org.odk.collect.android.activities.SplashScreenActivity;
 import org.odk.collect.android.adapters.InstanceUploaderAdapter;
@@ -150,6 +151,8 @@ public interface AppDependencyComponent {
     void inject(GoogleMapFragment mapFragment);
 
     void inject(MapboxMapFragment mapFragment);
+
+    void inject(MainActivity mainActivity);
 
     void inject(MainMenuActivity mainMenuActivity);
 
