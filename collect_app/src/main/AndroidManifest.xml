@@ -279,6 +279,13 @@ the specific language governing permissions and limitations under the License.
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!--flutter module-->
+        <activity
+            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name=".storage.migration.StorageMigrationService"

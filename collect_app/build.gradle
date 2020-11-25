@@ -155,6 +155,10 @@ android {
                 instrumentationEnabled false
             }
         }
+
+        profile {
+            initWith debug
+        }
     }
 
     // https://stackoverflow.com/a/27119543/152938
@@ -215,6 +219,15 @@ android {
     }
 }
 
+// Flutter module
+repositories {
+    maven {
+        url './../../flutter_module/build/host/outputs/repo'
+    }
+    maven {
+        url 'https://storage.googleapis.com/download.flutter.io'
+    }
+}
 configurations.all {
     resolutionStrategy {
         cacheDynamicVersionsFor(0, 'seconds')
@@ -375,6 +388,10 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${rootProject.okhttp3Version}"
 
     androidTestImplementation "androidx.work:work-testing:2.4.0"
+    // Flutter module
+    debugImplementation 'com.groots.flutter_module:flutter_debug:1.0'
+    profileImplementation 'com.groots.flutter_module:flutter_profile:1.0'
+    releaseImplementation 'com.groots.flutter_module:flutter_release:1.0'
 }
 
 // Must be at bottom to prevent dependency collisions
