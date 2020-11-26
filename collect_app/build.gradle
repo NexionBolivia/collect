@@ -222,7 +222,7 @@ android {
 // Flutter module
 repositories {
     maven {
-        url './../../flutter_module/build/host/outputs/repo'
+        url '../flutter_module/build/host/outputs/repo'
     }
     maven {
         url 'https://storage.googleapis.com/download.flutter.io'
