@@ -104,7 +104,7 @@ public class MainActivity extends CollectAbstractActivity {
                 body.put("username", loginUser.getText().toString());
                 body.put("password", loginPassword.getText().toString());
                 try {
-                    JSONObject response = performPostCall("http://192.168.100.3:8500/dummy/mobile/login", body);
+                    JSONObject response = performPostCall("https://support.nexion-dev.tk/dummy/mobile/login", body);
                     String support_api_token = response.getString("token");
                     String server_url = response.getString("koboServerURL");
                     String username = response.getString("koboUserName");

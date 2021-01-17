@@ -8,9 +8,8 @@ class HttpService {
   static MethodChannel _platform = const MethodChannel('FLUTTER_MODULE');
   static Duration delay = Duration();
   static final Uri _serverUrl = Uri(
-    host: "192.168.100.3",
-    port: 8500,
-    scheme: "http",
+    host: "support.nexion-dev.tk",
+    scheme: "https",
     path: "/dummy/mobile",
   );
 
@@ -31,7 +30,7 @@ class HttpService {
     body.removeWhere((key, value) => value == null);
     Uri uir = Uri(
       host: _serverUrl.host,
-      port: _serverUrl.port,
+      // port: _serverUrl.port,
       scheme: _serverUrl.scheme,
       path: _serverUrl.path + command,
     );
@@ -58,7 +57,7 @@ class HttpService {
     body.removeWhere((key, value) => value == null);
     Uri uir = Uri(
       host: _serverUrl.host,
-      port: _serverUrl.port,
+      // port: _serverUrl.port,
       scheme: _serverUrl.scheme,
       path: _serverUrl.path + command,
     );
@@ -86,7 +85,7 @@ class HttpService {
     Uri uir = Uri(
       queryParameters: params,
       host: _serverUrl.host,
-      port: _serverUrl.port,
+      // port: _serverUrl.port,
       scheme: _serverUrl.scheme,
       path: _serverUrl.path + command,
     );
@@ -109,7 +108,7 @@ class HttpService {
     params.removeWhere((key, value) => value == null);
     Uri uir = Uri(
       queryParameters: params,
-      port: _serverUrl.port,
+      // port: _serverUrl.port,
       host: _serverUrl.host,
       scheme: _serverUrl.scheme,
       path: _serverUrl.path + command,
