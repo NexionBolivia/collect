@@ -100,15 +100,15 @@ public class MainActivity extends CollectAbstractActivity {
                     loginButtonText.setText("Ingresando");
 
                 });
+                String username=loginUser.getText().toString();
+                String password=loginPassword.getText().toString();
+                String server_url="https://kf.nexion-dev.tk";
                 HashMap<String, String> body = new HashMap<>();
-                body.put("username", loginUser.getText().toString());
-                body.put("password", loginPassword.getText().toString());
+                body.put("username",username );
+                body.put("password", password);
                 try {
-                    JSONObject response = performPostCall("https://support.nexion-dev.tk/dummy/mobile/login", body);
-                    String support_api_token = response.getString("token");
-                    String server_url = response.getString("koboServerURL");
-                    String username = response.getString("koboUserName");
-                    String password = response.getString("koboPassword");
+                    JSONObject response = performPostCall("http://192.168.100.3:63253/login", body);
+                    String support_api_token = response.getString("authToken");
                     generalSharedPreferences.save("support_api_token", support_api_token);
                     generalSharedPreferences.save("server_url", server_url);
                     generalSharedPreferences.save("username", username);
