@@ -7,17 +7,20 @@ import '../response_error.dart';
 import '../api_request.dart';
 
 class GetProfile implements ApiRequest<GetProfileResponse> {
+  final String profileId;
+
+  GetProfile(this.profileId);
   @override
   Future<Map> toMap() async {
-    Map response = {};
+    Map response = {"profileId": profileId};
     return response;
   }
 
   @override
   Future<GetProfileResponse> fetch() async {
     http.Response myResponse = await HttpService.get(
-      command: "/profile",
-      // body: body,
+      command: "/Profile/Get",
+      params: {"profileId": profileId},
     );
     if (myResponse.statusCode == 200) {
       return GetProfileResponse.fromJson(jsonDecode(myResponse.body));

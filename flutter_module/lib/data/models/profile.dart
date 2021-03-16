@@ -1,9 +1,6 @@
 class Profile {
   Profile.fromJson(Map json)
-      : this.id = json["id"],
-        this.userName = json["userName"],
-        this.password = json["password"],
-        this.name = json["name"],
+      : this.id = json["profileId"],
         this.formation = json["formation"],
         this.address = json["address"],
         this.phone = json["phone"],
@@ -20,9 +17,6 @@ class Profile {
         this.serviceContinuity = json["serviceContinuity"];
 
   final String id;
-  final String userName;
-  final String password;
-  final String name;
   final String formation;
   final String address;
   final String phone;
@@ -38,5 +32,20 @@ class Profile {
   final int latrines;
   final String serviceContinuity;
 
-  Profile(this.id, this.userName, this.password, this.name, this.formation, this.address, this.phone, this.professionals, this.employes, this.department, this.province, this.municipality, this.waterConnections, this.connectionsWithMeter, this.connectionsWithoutMeter, this.publicPools, this.latrines, this.serviceContinuity);
+  Profile(
+      this.id,
+      this.formation,
+      this.address,
+      this.phone,
+      this.professionals,
+      this.employes,
+      this.department,
+      this.province,
+      this.municipality,
+      this.waterConnections,
+      this.connectionsWithMeter,
+      this.connectionsWithoutMeter,
+      this.publicPools,
+      this.latrines,
+      this.serviceContinuity);
 }

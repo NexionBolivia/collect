@@ -6,6 +6,9 @@ import 'package:flutter_module/screens/edit_profile/edit_profile.dart';
 import 'package:flutter_module/service/api/get_profile.dart';
 
 class ProfilePage extends StatefulWidget {
+  final String profileId;
+
+  const ProfilePage({Key key, @required this.profileId}) : super(key: key);
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -25,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         refreshing = true;
       });
-      GetProfile().fetch().then((value) {
+      GetProfile(widget.profileId).fetch().then((value) {
         if (mounted)
           setState(() {
             profile = value;
@@ -78,14 +81,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             margin: EdgeInsets.symmetric(vertical: 50),
                             child: Column(
                               children: [
-                                Text(
-                                  profile.name,
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
                                 Text(profile.formation),
                                 SizedBox(
                                   height: 30,

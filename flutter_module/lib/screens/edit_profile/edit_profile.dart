@@ -19,7 +19,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   final GlobalKey<FormState> form = GlobalKey<FormState>();
 
-  final MyTextField name = DeclaredTextField.getNameField();
   final MyTextField formation = DeclaredTextField.getFormationField();
   final MyTextField address = DeclaredTextField.getAddressField();
   final MyTextField phone = DeclaredTextField.getPhoneField();
@@ -40,7 +39,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       DeclaredTextField.getServiceContinuityField();
   @override
   void initState() {
-    name.text = widget.profile.name;
     formation.text = widget.profile.formation;
     address.text = widget.profile.address;
     phone.text = widget.profile.phone;
@@ -72,12 +70,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               margin: EdgeInsets.all(10),
               child: Column(
                 children: [
-                  name.build(
-                    context: context,
-                    labelText: "Nombre de la EPSA o CAPyS",
-                    disabled: loading,
-                    next: formation.focusNode,
-                  ),
                   formation.build(
                     context: context,
                     labelText: "Formación de consitución",
@@ -187,9 +179,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       });
       SetProfile(
         id: widget.profile.id,
-        userName: widget.profile.userName,
-        password: widget.profile.password,
-        name: name.text,
         formation: formation.text,
         address: address.text,
         phone: phone.text,

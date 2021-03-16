@@ -4,13 +4,14 @@ import 'dart:developer';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
+// https://192.168.100.3:63253
 class HttpService {
   static MethodChannel _platform = const MethodChannel('FLUTTER_MODULE');
   static Duration delay = Duration();
   static final Uri _serverUrl = Uri(
-    host: "support.nexion-dev.tk",
-    scheme: "https",
-    path: "/dummy/mobile",
+    host: "192.168.100.3",
+    scheme: "http",
+    port: 63253,
   );
 
   static String get serverUrl => _serverUrl.toString();
@@ -19,7 +20,9 @@ class HttpService {
     String response = await _platform
         .invokeMethod<String>("GET_TOKEN")
         .catchError((error) => null);
-    return response ?? "ddb11eb9-5ff8-4028-a8c3-ef20cbe576b8";
+    return response;
+    // return response ??
+    //     "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJlc2N1ZWxhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdXNlcmRhdGEiOiI4NzdkNjA1ZjFlOGY3OGY3NjIzNGEyNWRiNDUyOTA3ZWUwMWRhOGU4IiwibmJmIjoxNjE1OTIxNDgyLCJleHAiOjE2MTg1MTM0ODIsImlhdCI6MTYxNTkyMTQ4Mn0.ammg6QvBupZmGgzexjnGMB_J1b9kSy1Rta7QRZ1j3sXMwuuSR_b6-UiiBFwwiBR05mgXirs-M49kDinr2c_40A";
   }
 
   static Future<http.Response> post({
@@ -30,7 +33,7 @@ class HttpService {
     body.removeWhere((key, value) => value == null);
     Uri uir = Uri(
       host: _serverUrl.host,
-      // port: _serverUrl.port,
+      port: _serverUrl.port,
       scheme: _serverUrl.scheme,
       path: _serverUrl.path + command,
     );
@@ -40,62 +43,14 @@ class HttpService {
     return http
         .post(
       uir,
-      headers: {"Content-Type": "application/json", "token": await _token()},
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${await _token()}",
+      },
       body: bodyString,
     )
         .then((value) {
       log("Service POST <= $command body => ${value?.body ?? 'no body'}");
-      return Future.delayed(delay).then((_) => value);
-    });
-  }
-
-  static Future<http.Response> put({
-    String command = "/",
-    dynamic body,
-  }) async {
-    if (body == null) body = {};
-    body.removeWhere((key, value) => value == null);
-    Uri uir = Uri(
-      host: _serverUrl.host,
-      // port: _serverUrl.port,
-      scheme: _serverUrl.scheme,
-      path: _serverUrl.path + command,
-    );
-    String bodyString = jsonEncode(body);
-    log("Service PUT => $command body => $bodyString");
-    return http
-        .put(uir,
-            headers: {
-              "Content-Type": "application/json",
-              "token": await _token()
-            },
-            body: bodyString)
-        .then((value) {
-      log("Service PUT <= $command body => ${value?.body ?? 'no body'}");
-      return Future.delayed(delay).then((_) => value);
-    });
-  }
-
-  static Future<http.Response> delete({
-    String command = "/",
-    Map<String, dynamic> params,
-  }) async {
-    if (params == null) params = {};
-    params.removeWhere((key, value) => value == null);
-    Uri uir = Uri(
-      queryParameters: params,
-      host: _serverUrl.host,
-      // port: _serverUrl.port,
-      scheme: _serverUrl.scheme,
-      path: _serverUrl.path + command,
-    );
-    log(uir.toString());
-    log("Service DELETE => $command body => ${jsonEncode(params)}");
-    return http.delete(uir, headers: {
-      "Content-Type": "text/plain",
-      "token": await _token()
-    }).then((value) {
-      log("Service DELETE <= $command body => ${value?.body ?? 'no body'}");
       return Future.delayed(delay).then((_) => value);
     });
   }
@@ -108,7 +63,7 @@ class HttpService {
     params.removeWhere((key, value) => value == null);
     Uri uir = Uri(
       queryParameters: params,
-      // port: _serverUrl.port,
+      port: _serverUrl.port,
       host: _serverUrl.host,
       scheme: _serverUrl.scheme,
       path: _serverUrl.path + command,
@@ -116,8 +71,8 @@ class HttpService {
     log(uir.toString());
     log("Service GET => $command body => ${jsonEncode(params)}");
     return http.get(uir, headers: {
-      "Content-Type": "text/plain",
-      "token": await _token()
+      "Content-Type": "application/json",
+      "Authorization": "Bearer ${await _token()}",
     }).then((value) {
       log("Service GET <= $command? body => ${value?.body ?? 'no body'}");
       return Future.delayed(delay).then((_) => value);

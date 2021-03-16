@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_module/data/models/profile.dart';
 import 'package:http/http.dart' as http;
 
 import '../http_service.dart';
@@ -10,9 +8,6 @@ import '../api_request.dart';
 class SetProfile implements ApiRequest<String> {
   SetProfile({
     @required this.id,
-    @required this.userName,
-    @required this.password,
-    @required this.name,
     @required this.formation,
     @required this.address,
     @required this.phone,
@@ -30,9 +25,6 @@ class SetProfile implements ApiRequest<String> {
   });
 
   final String id;
-  final String userName;
-  final String password;
-  final String name;
   final String formation;
   final String address;
   final String phone;
@@ -51,10 +43,7 @@ class SetProfile implements ApiRequest<String> {
   @override
   Future<Map> toMap() async {
     Map response = {
-      "id": id,
-      "userName": userName,
-      "password": password,
-      "name": name,
+      "profileId": id,
       "formation": formation,
       "address": address,
       "phone": phone,
@@ -76,8 +65,8 @@ class SetProfile implements ApiRequest<String> {
   @override
   Future<String> fetch() async {
     http.Response myResponse = await HttpService.post(
-      command: "/profile",
-      body:await toMap(),
+      command: "/Profile/Update",
+      body: await toMap(),
     );
     if (myResponse.statusCode == 200) {
       return "ok";
