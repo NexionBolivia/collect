@@ -67,6 +67,15 @@ task checkInstrumented(type: GradleBuild) {
     startParameter.projectProperties = ["android.testInstrumentationRunnerArguments.package": "org.odk.collect.android.instrumented"]
 }
 
+task buildFlutterProyect(type: Exec) {
+    workingDir "./flutter_module"
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine 'cmd', '/c', 'flutter pub get && flutter clean && flutter build aar'
+    } else {
+        commandLine 'sh', '-c', 'flutter pub get && flutter clean && flutter build aar'
+    }
+}
+
 ext {
     androidCompileSdk = 30
     androidMinSdk = 21
