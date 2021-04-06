@@ -4,14 +4,14 @@ import 'dart:developer';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-// https://192.168.100.3:63253
+// https://support.nexion-dev.tk
 class HttpService {
   static MethodChannel _platform = const MethodChannel('FLUTTER_MODULE');
   static Duration delay = Duration();
   static final Uri _serverUrl = Uri(
-    host: "192.168.100.3",
-    scheme: "http",
-    port: 63253,
+    host: "support.nexion-dev.tk",
+    scheme: "https",
+    // port: 63253,
   );
 
   static String get serverUrl => _serverUrl.toString();
