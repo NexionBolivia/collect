@@ -23,6 +23,8 @@ android {
         release {
             minifyEnabled false
         }
+        profile {
+        }
     }
 
     compileOptions {
